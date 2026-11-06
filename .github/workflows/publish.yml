@@ -21,6 +21,10 @@ jobs:
           java-version: '17'
           cache: maven
           server-id: github
+      - name: Generate the SBOM
+        run: |
+          ./mvnw --batch-mode --no-transfer-progress clean package org.cyclonedx:cyclonedx-maven-plugin:2.9.3:makeAggregateBom
+          cp target/bom.json demo.sbom/src/main/resources
       - name: Build, test, and publish
         run: ./mvnw --batch-mode --no-transfer-progress deploy
         env:
