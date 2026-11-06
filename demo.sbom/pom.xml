@@ -10,12 +10,22 @@
 	</parent>
 	<artifactId>demo.sbom</artifactId>
 	<packaging>jar</packaging>
+	<properties>
+		<cyclonedx.skip>true</cyclonedx.skip>
+	</properties>
 	<build>
 		<resources>
+			<resource>
+				<directory>${project.basedir}/../target</directory>
+				<includes>
+					<include>bom.json</include>
+				</includes>
+			</resource>
 			<resource>
 				<directory>src/main/resources</directory>
 				<excludes>
 					<exclude>.gitkeep</exclude>
+					<exclude>bom.json</exclude>
 				</excludes>
 			</resource>
 		</resources>
